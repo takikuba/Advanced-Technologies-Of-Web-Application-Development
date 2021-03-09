@@ -26,5 +26,4 @@ This project will be the realization of my [WDPAI](https://github.com/takikuba/W
   <summary><b>Views</b><br></summary>
     <img src="https://github.com/takikuba/WDPAI/blob/main/md/Web%201920%20%E2%80%93%201.png?raw=true">
     <img src="https://github.com/takikuba/WDPAI/blob/main/md/Web%201920%20%E2%80%93%208.png?raw=true">
-    <img src="https://github.com/takikuba/WDPAI/blob/main/md/Web%201920%20%E2%80%93%208.png?raw=true">
  </details>
