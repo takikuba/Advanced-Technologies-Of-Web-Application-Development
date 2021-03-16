@@ -1,0 +1,29 @@
+<h3> Recipe Details: </h3>
+
+<div>
+    <div> 
+        <label> <b> Name: </b> </label> {{recipe.name}}
+    </div>
+    <div> 
+        <img src="../../../assets/{{recipe.image}}" width="200" height=auto>
+    </div>
+    <div> 
+        <label> <b> Description: </b> </label> {{recipe.description}}
+    </div>
+    <div> 
+        <label> <b> Kcal: </b> </label> {{recipe.kcal}}
+    </div>
+    <div> 
+        <label> <b> Time: </b> </label> {{recipe.time}}
+    </div>
+    <div> 
+        <label> <b> Like: </b> </label> {{recipe.likeB}}
+    </div>
+    <div> 
+        <label> <b> Dislike: </b> </label> {{recipe.dislikeB}}
+    </div>
+    <div>
+        <iframe width="760" height="480" [src]="urlSafe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+</div>

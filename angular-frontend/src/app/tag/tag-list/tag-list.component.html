@@ -1,0 +1,12 @@
+<h2>List of tags:</h2>
+<table class="table table-striped">
+    <thead>
+        <th> Name </th>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let tag of tags">
+            <td> {{ tag.name }} </td>
+        </tr>
+    </tbody>
+    <a routerLink="../tag-create" routerLinkActive="active" class = "nav-link">+ tag</a>
+</table>

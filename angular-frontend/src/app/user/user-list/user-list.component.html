@@ -1,0 +1,24 @@
+<h2>List of users:</h2>
+<table class="table table-striped">
+    <thead>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Phone </th>
+        <th> Desc </th>
+        <th> Action </th>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let user of users">
+            <td> {{ user.firstName }} </td>
+            <td> {{ user.lastName }} </td>
+            <td> {{ user.phone }} </td>
+            <td> {{ user.description }} </td>
+            <td>
+                <button (click) = "userView(user.id)" class = "btn btn-info"> View </button>
+                <button (click) = "userUpdate(user.id)" class = "btn btn-warning"> Update </button>
+                <button (click) = "userDelete(user.id)" class = "btn btn-danger"> Delete </button>
+            </td>
+        </tr>
+    </tbody>
+    <a routerLink="../user-create" routerLinkActive="active" class = "nav-link">+ user</a>
+</table>

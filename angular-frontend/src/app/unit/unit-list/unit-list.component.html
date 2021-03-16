@@ -1,0 +1,14 @@
+<h2>List of units:</h2>
+<table class="table table-striped">
+    <thead>
+        <th> Name </th>
+        <th> Count </th>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let unit of units">
+            <td> {{ unit.name }} </td>
+            <td> {{ unit.count }} </td>
+        </tr>
+    </tbody>
+    <a routerLink="../unit-create" routerLinkActive="" class = "nav-link">+ unit</a>
+</table>
