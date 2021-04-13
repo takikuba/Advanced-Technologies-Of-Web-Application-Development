@@ -4,6 +4,7 @@ import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ViewEncapsulation } from '@angular/core';
+import { Ingredient } from 'src/app/ingredient/ingredient';
 
 @Component({
   selector: 'app-recipe-view',
@@ -17,7 +18,7 @@ export class RecipeViewComponent implements OnInit {
   recipe: Recipe;
   link: string;
   urlSafe: SafeResourceUrl;
-
+  ingredients: Ingredient[];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,13 @@ export class RecipeViewComponent implements OnInit {
     this.recipeService.getRecipeById(this.id).subscribe(data => {
       this.recipe = data;
       this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.recipe.link);
+    })
+    this.getIngredients(this.id);
+  }
+
+  getIngredients(id: number) {
+    this.recipeService.getRecipeIngredients(id).subscribe( data => {
+      this.ingredients = data;
     })
   }
 

@@ -1,24 +1,43 @@
-<h2>List of recipes:</h2>
-<table class="table table-striped">
-    <thead>
-        <th> Title </th>
-        <th> likeB </th>
-        <th> dislikeB </th>
-        <th> Kcal </th>
-        <th> Time </th>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let recipe of recipes">
-            <td> {{ recipe.name }} </td>
-            <td> {{ recipe.likeB }} </td>
-            <td> {{ recipe.dislikeB }} </td>
-            <td> {{ recipe.kcal }} </td>
-            <td> {{ recipe.time }} </td>
-            <td>
-                <button (click) = "recipeView(recipe.id)" class = "btn btn-info"> View </button>
-                <button (click) = "recipeUpdate(recipe.id)" class = "btn btn-warning"> Update </button>
-                <button (click) = "recipeDelete(recipe.id)" class = "btn btn-danger"> Delete </button>
-            </td>
+<div class="recipe-list">
+
+    <h2>Recipes:</h2>
+    <section class="recipes">
+        <tr *ngFor="let recipe of recipes">
+            <div id= {{ recipe.getId() }}>
+                <img src= {{ recipe.getImage() }}>
+                <div>
+                    <h2> {{ recipe.title }} </h2>
+                    <p> {{ recipe.description }} </p>
+                    <div class="info-section">
+                        <i class="fas fa-fire"> {{ recipe.kcal }} </i>
+                        <i class="fas fa-stopwatch"> {{ recipe.time }} </i>
+                    </div>
+                    <div class="social-section">
+                        <i class="fas fa-heart"> {{ recipe.likeB }} </i>
+                        <i class="fas fa-minus-square"> {{ recipe.dislikeB }} </i>
+                    </div>
+                </div>
+            </div>
         </tr>
-    </tbody>
-</table>
+    </section>
+
+</div>
+
+<template id="project-template">
+    <div id="">
+        <img src="">
+        <div>
+            <h2>title</h2>
+            <p>description</p>
+            <div class="info-section">
+                <i class="fas fa-fire"> 0</i>
+                <i class="fas fa-stopwatch"> 0</i>
+            </div>
+            <div class="social-section">
+                <i class="fas fa-heart"> 0</i>
+                <i class="fas fa-minus-square"> 0</i>
+            </div>
+        </div>
+    </div>
+</template>
+

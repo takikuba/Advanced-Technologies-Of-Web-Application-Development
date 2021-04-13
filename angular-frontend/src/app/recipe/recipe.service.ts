@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Ingredient } from '../ingredient/ingredient';
 import { Recipe } from './recipe';
 
 @Injectable({
@@ -23,11 +24,15 @@ export class RecipeService {
     }
 
     getRecipeById(id: number): Observable<Recipe> {
-      return this.httpClient.get<Recipe>(`${this.baseURL}/${id}`)
+      return this.httpClient.get<Recipe>(`${this.baseURL}/${id}`);
     }
 
     updateRecipe(id: number, recipe: Recipe): Observable<Object> {
       return this.httpClient.put(`${this.baseURL}/${id}`, recipe);
+    }
+
+    getRecipeIngredients(id: number) {
+      return this.httpClient.get<Ingredient[]>(`${this.baseURL}/${id}/ingredients`);
     }
 
     deleteRecipe(id: number): Observable<Object> {
