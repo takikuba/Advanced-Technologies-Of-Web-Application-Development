@@ -3,6 +3,7 @@ package com.ztpai.rest;
 import com.ztpai.exception.ResourceConflictException;
 import com.ztpai.model.User;
 import com.ztpai.model.UserRequest;
+import com.ztpai.repository.UserRepository;
 import com.ztpai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -11,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.HashMap;
@@ -35,14 +33,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = GET, value = "/user/{userId}")
+    @RequestMapping(method = GET, value = "/users/{userId}")
     public User loadById(@PathVariable Long userId) {
         return this.userService.findById(userId);
-    }
-
-    @RequestMapping(method = GET, value = "/user/all")
-    public List<User> loadAll() {
-        return this.userService.findAll();
     }
 
     @RequestMapping(method = POST, value = "/signup")
@@ -64,5 +57,6 @@ public class UserController {
     public User user() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
 
 }

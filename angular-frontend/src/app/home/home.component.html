@@ -1,0 +1,18 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center none">
+  <app-api-card  *ngFor = "let recipe of recipes"
+    (apiClick)="recipeView($event)"
+    [responseObj]="fooResponse"
+    apiText="Let see!"
+    content='{{recipe.description}}'
+    fxFlex
+    imgUrl='assets/image/{{recipe.image}}'
+    likeB='{{recipe.likeB}}'
+    dislikeB='{{recipe.dislikeB}}'
+    time='{{recipe.time}}'
+    kcal='{{recipe.kcal}}'
+    title='{{recipe.name}}'
+    id = '{{recipe.id}}'
+  >
+  </app-api-card>
+</div>
+

@@ -1,54 +1,66 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserListComponent } from './user/user-list/user-list.component';
-import { CreateUserComponent } from './user/user-create/user-create.component';
-import { UnitListComponent } from './unit/unit-list/unit-list.component';
-import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
-import { TagListComponent } from './tag/tag-list/tag-list.component';
-import { TagCreateComponent } from './tag/tag-create/tag-create.component';
-import { IngredientListComponent } from './ingredient/ingredient-list/ingredient-list.component';
-import { IngredientCreateComponent } from './ingredient/ingredient-create/ingredient-create.component';
-import { UserUpdateComponent } from './user/user-update/user-update.component';
-import { UserViewComponent } from './user/user-view/user-view.component';
-import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
-import { RecipeUpdateComponent } from './recipe/recipe-update/recipe-update.component';
-import { RecipeViewComponent } from './recipe/recipe-view/recipe-view.component';
-import { ModalComponent } from './modal/modal/modal.component';
-import { UserListRecipesComponent } from './user/user-list-recipes/user-list-recipes.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {HomeComponent} from './home';
+import {LoginComponent} from './login';
+import {AdminGuard, GuestGuard, LoginGuard} from './guard';
+import {NotFoundComponent} from './not-found';
+import {AccountMenuComponent} from './component/header/account-menu/account-menu.component';
+import {ApiCardComponent, FooterComponent, HeaderComponent} from './component';
 
+import {ApiService, AuthService, ConfigService, FooService, UserService} from './service';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {ForbiddenComponent} from './forbidden/forbidden.component';
+import {AdminComponent} from './admin/admin.component';
+import {SignupComponent} from './signup/signup.component';
+import {AngularMaterialModule} from './angular-material/angular-material.module';
+import {MatIconRegistry} from '@angular/material/icon';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { RecipeViewComponent } from './recipe-view/recipe-view/recipe-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent,
-    CreateUserComponent,
-    UnitListComponent,
-    UnitCreateComponent,
-    TagListComponent,
-    TagCreateComponent,
-    IngredientListComponent,
-    IngredientCreateComponent,
-    UserUpdateComponent,
-    UserViewComponent,
-    RecipeListComponent,
-    RecipeCreateComponent,
-    RecipeUpdateComponent,
-    RecipeViewComponent,
-    ModalComponent,
-    UserListRecipesComponent
+    HeaderComponent,
+    FooterComponent,
+    ApiCardComponent,
+    HomeComponent,
+    LoginComponent,
+    NotFoundComponent,
+    AccountMenuComponent,
+    ChangePasswordComponent,
+    ForbiddenComponent,
+    AdminComponent,
+    SignupComponent,
+    RecipeViewComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    AngularMaterialModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    LoginGuard,
+    GuestGuard,
+    AdminGuard,
+    FooService,
+    AuthService,
+    ApiService,
+    UserService,
+    ConfigService,
+    MatIconRegistry
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><b>{{title}}</b></mat-card-title> <br>
+  </mat-card-header>
+  <em class="fas fa-fire"> {{kcal}} </em> 
+  <em class="fas fa-stopwatch" style="position:absolute; left: 120px;"> {{time}} </em> <br>
+  <em class="fas fa-heart"> {{likeB}} </em>
+  <em class="fas fa-minus-square" style="position:absolute; left: 120px;"> {{dislikeB}} </em> 
+  <img [src]="imgUrl" mat-card-image>
+
+  <mat-card-content>
+    <p>
+      {{content}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      (click)= "onButtonClick()"
+      color="primary"
+      mat-raised-button>
+      {{apiText}}
+    </button>
+  </mat-card-actions>
+
+</mat-card>

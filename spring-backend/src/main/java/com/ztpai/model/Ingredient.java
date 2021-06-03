@@ -1,5 +1,7 @@
 package com.ztpai.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,19 +12,19 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "kcal")
-    private int kcal;
+
     @Column(name = "count")
     private int count;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_name")
+    IngredientName name;
 
     public Ingredient() {
     }
 
-    public Ingredient(String name, int kcal, int count) {
+    public Ingredient(IngredientName name, int count) {
         this.name = name;
-        this.kcal = kcal;
         this.count = count;
     }
 
@@ -35,19 +37,11 @@ public class Ingredient {
     }
 
     public String getName() {
-        return name;
+        return name.getName();
     }
 
-    public void setName(String name) {
+    public void setName(IngredientName name) {
         this.name = name;
-    }
-
-    public int getKcal() {
-        return kcal;
-    }
-
-    public void setKcal(int kcal) {
-        this.kcal = kcal;
     }
 
     public int getCount() {

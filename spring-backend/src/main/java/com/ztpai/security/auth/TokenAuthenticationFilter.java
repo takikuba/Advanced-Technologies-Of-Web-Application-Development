@@ -23,9 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by fan.jin on 2016-10-19.
- */
+
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final Log logger = LogFactory.getLog(this.getClass());
@@ -37,9 +35,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Qualifier("customUserDetailsService")
     private UserDetailsService userDetailsService;
 
-    /*
-     * The below paths will get ignored by the filter
-     */
     public static final String ROOT_MATCHER = "/";
     public static final String FAVICON_MATCHER = "/favicon.ico";
     public static final String HTML_MATCHER = "/**/*.html";

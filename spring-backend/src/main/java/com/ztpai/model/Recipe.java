@@ -1,7 +1,11 @@
 package com.ztpai.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "recipes")
@@ -27,8 +31,32 @@ public class Recipe {
     private String image;
     @Column(name = "link")
     private String link;
-    @Column(name = "id_assigned_by")
-    private long idAssignedBy;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "recipe_ingredients",
+            joinColumns = @JoinColumn(name = "id_recipe", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_ingredient", referencedColumnName = "id"))
+    List<Ingredient> ingredients;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "recipe_tags",
+            joinColumns = @JoinColumn(name = "id_recipe", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_tags", referencedColumnName = "id"))
+    List<Tag> tags;
+
+    public Recipe() {
+    }
+
+    public Recipe(String name, String description, int likeB, int dislikeB, int kcal, int time, String image, String link) {
+        this.name = name;
+        this.description = description;
+        this.likeB = likeB;
+        this.dislikeB = dislikeB;
+        this.kcal = kcal;
+        this.time = time;
+        this.image = image;
+        this.link = link;
+    }
 
     public long getId() {
         return id;
@@ -102,11 +130,19 @@ public class Recipe {
         this.link = link.replace("watch?v=", "embed/");
     }
 
-    public long getIdAssignedBy() {
-        return idAssignedBy;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setIdAssignedBy(long idAssignedBy) {
-        this.idAssignedBy = idAssignedBy;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
