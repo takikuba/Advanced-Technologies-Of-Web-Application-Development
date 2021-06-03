@@ -13,6 +13,7 @@ public class UserTokenState {
     public UserTokenState(String access_token, long expires_in) {
         this.access_token = access_token;
         this.expires_in = expires_in;
+        System.out.println(access_token);
     }
 
     public String getAccess_token() {

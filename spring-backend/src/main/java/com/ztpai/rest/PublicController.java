@@ -30,13 +30,6 @@ public class PublicController {
     @Autowired
     RecipeRepository recipeRepo;
 
-    @RequestMapping(method = GET, value = "/foo")
-    public Map<String, String> getFoo() {
-        Map<String, String> fooObj = new HashMap<>();
-        fooObj.put("foo", "bar");
-        return fooObj;
-    }
-
     @GetMapping(value = "/users")
     public List<User> getUsers(){
         return userRepo.findAll();

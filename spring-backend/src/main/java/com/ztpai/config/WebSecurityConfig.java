@@ -82,7 +82,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler)
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
             .logoutSuccessHandler(logoutSuccess).deleteCookies(TOKEN_COOKIE);
-
   }
 
   public void changePassword(String oldPassword, String newPassword) throws Exception {

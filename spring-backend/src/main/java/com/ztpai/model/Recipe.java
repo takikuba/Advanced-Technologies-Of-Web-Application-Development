@@ -58,6 +58,8 @@ public class Recipe {
         this.link = link;
     }
 
+
+
     public long getId() {
         return id;
     }
@@ -145,4 +147,15 @@ public class Recipe {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public void addLike(){
+        int i = getLikeB();
+        setLikeB(++i);
+    }
+
+    public void addDislike(){
+        int i = getDislikeB();
+        setDislikeB(++i);
+    }
+
 }
