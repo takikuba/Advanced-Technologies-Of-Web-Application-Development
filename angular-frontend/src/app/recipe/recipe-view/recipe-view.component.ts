@@ -4,7 +4,7 @@ import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ViewEncapsulation } from '@angular/core';
-import { Ingredient } from 'src/app/ingredient/ingredient';
+import { Ingredient } from 'app/ingredient/ingredient';
 
 @Component({
   selector: 'app-recipe-view',
