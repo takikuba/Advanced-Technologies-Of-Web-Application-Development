@@ -12,15 +12,13 @@ public class Unit {
     private long id;
     @Column( name = "name")
     private String name;
-    @Column( name = "count")
-    private int count;
+
 
     public Unit() {
     }
 
-    public Unit(String name, int count) {
+    public Unit(String name) {
         this.name = name;
-        this.count = count;
     }
 
     public long getId() {
@@ -37,13 +35,5 @@ public class Unit {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 }

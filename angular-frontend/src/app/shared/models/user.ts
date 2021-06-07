@@ -5,5 +5,7 @@ export class User {
     username: string;
     firstname: string;
     lastname: string;
+    phone: string;
+    description: string;
     authorities: Authority[];
 }

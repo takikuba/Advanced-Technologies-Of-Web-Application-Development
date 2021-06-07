@@ -48,6 +48,18 @@ export class ConfigService {
     return this.apiUrl + '/recipes';
   }
 
+  get unitsUrl(): string {
+    return this.apiUrl + '/units';
+  }
+
+  get tagUrl(): string {
+    return this.apiUrl + '/tags';
+  }
+
+  get ingredientsUrl(): string {
+    return this.apiUrl + '/ingredients';
+  }
+
   recipesUrlById(id: number): string {
     console.log(this.apiUrl + '/recipes/' + id);
     return this.apiUrl + '/recipes/' + id;

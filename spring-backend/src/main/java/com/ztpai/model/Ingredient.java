@@ -20,12 +20,17 @@ public class Ingredient {
     @JoinColumn(name = "id_name")
     IngredientName name;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_unit")
+    Unit unit;
+
     public Ingredient() {
     }
 
-    public Ingredient(IngredientName name, int count) {
+    public Ingredient(IngredientName name, int count, Unit unit) {
         this.name = name;
         this.count = count;
+        this.unit = unit;
     }
 
     public Long getId() {
@@ -52,4 +57,11 @@ public class Ingredient {
         this.count = count;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 }

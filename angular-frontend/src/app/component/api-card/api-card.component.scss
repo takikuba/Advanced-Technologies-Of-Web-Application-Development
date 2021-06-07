@@ -4,7 +4,7 @@
 }
 
 mat-card {
-  text-align: left;
+  text-align: center;
 
   .response-success {
     background-color: #dff0d8;
@@ -49,6 +49,10 @@ mat-card {
   mat-card-actions {
     margin-bottom: 0;
     padding-bottom: 8px;
+  }
+
+  em {
+    margin: 10px;
   }
 
   pre {

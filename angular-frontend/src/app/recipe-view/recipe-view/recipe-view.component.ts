@@ -29,4 +29,12 @@ export class RecipeViewComponent implements OnInit {
     })
   }
 
+  addLike(): void {
+    console.log("add like to: " + this.recipe.id);
+  }
+
+  addDislike(): void {
+    console.log("add dislike to: " + this.recipe.id);
+  }
+
 }

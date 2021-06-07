@@ -1,0 +1,27 @@
+<div class="content">
+    <h2>List of tags:</h2>
+    <table>
+        <thead>
+            <th> Name </th>
+        </thead>
+        <tbody>
+            <tr mdbTableCol *ngFor = "let tag of tags">
+                <td> {{ tag.name }} </td>
+                <td>
+                    <button (click) = "tagDelete(tag)"> <i class="fas fa-trash"></i></button>
+                </td>
+
+            </tr>
+        </tbody>
+        <div class="tag-add-form">
+            <form (ngSubmit) = "addTag()">
+                <div class="form-group">
+                    <label> Tag Name: </label>
+                    <input type="text" class="form-control" id = "name"
+                        [(ngModel)] = "tag.name" name = "name"> 
+                </div>
+                <button class = "button-add" type="submit">Add</button>
+            </form>
+        </div>
+    </table>
+</div>

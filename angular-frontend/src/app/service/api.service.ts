@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {serialize} from '../shared/utilities/serialize';
 import {Observable} from 'rxjs';
 import {catchError, filter, map} from 'rxjs/operators';
+import { UserService } from './user.service';
 
 export enum RequestMethod {
   Get = 'GET',
@@ -43,6 +44,7 @@ export class ApiService {
   }
 
   post(path: string, body: any, customHeaders?: HttpHeaders): Observable<any> {
+    console.log("POST method!");
     return this.request(path, body, RequestMethod.Post, customHeaders);
   }
 
@@ -52,6 +54,26 @@ export class ApiService {
 
   delete(path: string, body?: any): Observable<any> {
     return this.request(path, body, RequestMethod.Delete);
+  }
+
+  fetchPost(path: string, body: any): Promise<any> {
+    console.log("POST!");
+    console.log(JSON.stringify(body));
+    return fetch(path, {
+                                method: "POST", 
+                                credentials: "include", 
+                                body: JSON.stringify(body),
+                                headers: {"Content-Type": "application/json"}}).then(data => data.json());
+  }
+
+  fetchDelete(path: string, body: any): Promise<any> {
+    console.log("DELETE!");
+    console.log(body);
+    return fetch(path, {
+                                method: "DELETE", 
+                                credentials: "include", 
+                                body: JSON.stringify(body),
+                                headers: {"Content-Type": "application/json"}}).then(data => data.json());
   }
 
   private request(path: string, body: any, method = RequestMethod.Post, custemHeaders?: HttpHeaders): Observable<any> {
@@ -65,12 +87,11 @@ export class ApiService {
       .pipe(catchError(error => this.checkError(error)));
   }
 
-  // Display error if logged in, otherwise redirect to IDP
   private checkError(error: any): any {
     if (error && error.status === 401) {
-      // this.redirectIfUnauth(error);
+      console.log("User unauthorized! 401!");
     } else {
-      // this.displayError(error);
+      console.log("User athorize! NOT 401!")
     }
     throw error;
   }

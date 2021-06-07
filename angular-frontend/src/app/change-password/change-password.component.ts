@@ -13,17 +13,7 @@ import {mergeMap} from 'rxjs/operators';
 export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
-  /**
-   * Boolean used in telling the UI
-   * that the form has been submitted
-   * and is awaiting a response
-   */
   submitted = false;
-
-  /**
-   * Diagnostic message from received
-   * form request error
-   */
   notification: DisplayMessage;
 
   constructor(

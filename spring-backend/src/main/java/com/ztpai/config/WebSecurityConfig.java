@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -63,6 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
+  @Bean
+  public OriginFilter orignFilter() {
+    return new OriginFilter();
+  }
+
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder)
           throws Exception {
@@ -73,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
     http.csrf().ignoringAntMatchers("/api/login", "/api/signup")
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -82,7 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler)
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
             .logoutSuccessHandler(logoutSuccess).deleteCookies(TOKEN_COOKIE);
-
+    http.csrf().disable();
+    http.addFilterBefore(orignFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   public void changePassword(String oldPassword, String newPassword) throws Exception {
