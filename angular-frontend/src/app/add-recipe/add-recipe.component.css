@@ -1,0 +1,57 @@
+.content {
+    width: 100%;
+    background-color: #696969;
+    border: solid #FFAD5C 3px;
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    justify-items: baseline;
+    align-content: center;
+}
+
+.recipe {
+    display: contents;
+    width: 100%;
+    border-bottom: 1px solid #FFAD5C;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+button{
+    background-color: #ffae5c7c;
+    border-radius: 10px;
+    border: 1px solid #FFAD5C;
+}
+
+input, select {
+    background-color: #696969;
+    border-radius: 10px;
+    border: 1px solid #FFAD5C;
+}
+
+.ingredients-form {
+    display: inline-flex;
+}
+
+form {
+    display: inline-flex;
+}
+
+.ingredients, .tags{
+    width: 100%;
+    border-bottom: 1px solid #FFAD5C;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+table {
+    align-items: center;
+    width: 100%;
+}
+
+td {
+    border-bottom: 0.1px solid #FFAD5C;
+}

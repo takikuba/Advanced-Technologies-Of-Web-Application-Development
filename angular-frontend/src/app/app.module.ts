@@ -21,6 +21,13 @@ import {AngularMaterialModule} from './angular-material/angular-material.module'
 import {MatIconRegistry} from '@angular/material/icon';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { RecipeViewComponent } from './recipe-view/recipe-view/recipe-view.component';
+import { AdminMenuComponent } from './component/header/admin-menu/admin-menu.component';
+import { AdminTagsComponent } from './admin/admin-tags/admin-tags.component';
+import { AdminIngredientsComponent } from './admin/admin-ingredients/admin-ingredients.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminUnitComponent } from './admin/admin-unit/admin-unit.component';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { UserCardComponent } from './admin/admin-users/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,14 @@ import { RecipeViewComponent } from './recipe-view/recipe-view/recipe-view.compo
     ForbiddenComponent,
     AdminComponent,
     SignupComponent,
-    RecipeViewComponent
+    RecipeViewComponent,
+    AdminMenuComponent,
+    AdminTagsComponent,
+    AdminIngredientsComponent,
+    AdminUsersComponent,
+    AdminUnitComponent,
+    AddRecipeComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserAnimationsModule,

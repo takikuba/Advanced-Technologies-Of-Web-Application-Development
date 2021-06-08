@@ -2,17 +2,18 @@ package com.ztpai.rest;
 
 import com.ztpai.exception.ResourceNotFoundException;
 import com.ztpai.model.Recipe;
+import com.ztpai.model.Tag;
 import com.ztpai.model.User;
 import com.ztpai.repository.RecipeRepository;
+import com.ztpai.repository.TagRepository;
 import com.ztpai.repository.UserRepository;
 import com.ztpai.responses.RecipeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,11 +30,8 @@ public class PublicController {
     UserRepository userRepo;
     @Autowired
     RecipeRepository recipeRepo;
-
-    @GetMapping(value = "/users")
-    public List<User> getUsers(){
-        return userRepo.findAll();
-    }
+    @Autowired
+    TagRepository tagRepo;
 
     @GetMapping(value = "/recipes")
     public List<Recipe> getRecipes(){

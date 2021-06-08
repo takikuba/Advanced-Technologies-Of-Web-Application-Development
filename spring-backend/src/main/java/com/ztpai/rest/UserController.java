@@ -1,25 +1,27 @@
 package com.ztpai.rest;
 
-import com.ztpai.exception.ExceptionResponse;
 import com.ztpai.exception.ResourceConflictException;
 import com.ztpai.exception.ResourceNotFoundException;
 import com.ztpai.model.*;
 import com.ztpai.repository.*;
+import com.ztpai.request.IngredientRequest;
+import com.ztpai.request.RecipeRequest;
+import com.ztpai.request.TagRequest;
 import com.ztpai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -38,6 +40,12 @@ public class UserController {
     private UnitRepository unitRepo;
     @Autowired
     private RecipeRepository recipeRepo;
+    @Autowired
+    private IngredientRepository ingredientRepo;
+    @Autowired
+    private RecipeTagsRepository recipeTagRepo;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     public UserController(UserService userService) {
@@ -69,7 +77,7 @@ public class UserController {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    @RequestMapping(method = GET, value = "/ingredients")
+    @GetMapping("/ingredients")
     @PreAuthorize("hasRole('USER')")
     public List<IngredientName> getIngredients(){
         return ingredientNameRepo.findAll();
@@ -99,8 +107,36 @@ public class UserController {
 
     @PostMapping(value = "/recipes")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> addRecipe(@RequestBody Recipe recipe){
-        return ResponseEntity.ok(recipeRepo.save(recipe));
+    public List<Recipe> addRecipe(@RequestBody RecipeRequest recipe){
+        Recipe newRecipe = new Recipe();
+        newRecipe.setName(recipe.getName());
+        System.out.println("recipe name: " + recipe.getName());
+        newRecipe.setTime(recipe.getTime());
+        System.out.println("recipe time:  "+ recipe.getTime());
+        newRecipe.setKcal(recipe.getKcal());
+        newRecipe.setDescription(recipe.getDescription());
+        newRecipe.setImage(recipe.getImage());
+        newRecipe.setLink(recipe.getLink());
+
+        List<Ingredient> newIngredients = new ArrayList<>();
+        for(IngredientRequest i: recipe.getIngredients()){
+            System.out.println("Ingredient: " + i.getName() + " " + i.getCount() + " " + i.getUnit());
+            newIngredients.add(new Ingredient(ingredientNameRepo.findIngredientNameByName(i.getName()), i.getCount(), unitRepo.findUnitByName(i.getUnit())));
+        }
+        newRecipe.setIngredients(newIngredients);
+
+        recipeRepo.save(newRecipe);
+
+        List<Tag> newTags = new ArrayList<>();
+        for(TagRequest t: recipe.getTags()){
+            Tag t2 = tagRepo.getByName(t.getName());
+            newTags.add(t2);
+//            recipeTagRepo.save(new RecipeTags(newRecipe.getId(), t2.getId()));
+        }
+        newRecipe.setTags(newTags);
+
+        System.out.println(newRecipe);
+        return recipeRepo.findAll();
     }
 
     @PutMapping("/recipes/{id}")
@@ -119,7 +155,7 @@ public class UserController {
         recipe.setLikeB(updateRecipe.getLikeB());
         recipe.setDislikeB(updateRecipe.getDislikeB());
 
-        Recipe newRecipe = recipeRepo.save(recipe);
+        recipeRepo.save(recipe);
         return ResponseEntity.ok(updateRecipe);
     }
 
@@ -130,11 +166,20 @@ public class UserController {
         return ResponseEntity.ok();
     }
 
-    @PutMapping("/recipes/{id}/dislike")
+    @PostMapping("/recipes/{id}/dislike")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity.BodyBuilder addDisLike(@PathVariable long id){
+    public ResponseEntity.BodyBuilder addDisLike(@PathVariable long id, @RequestBody long idBody){
         recipeRepo.getOne(id).addDislike();
         return ResponseEntity.ok();
+    }
+
+    public void sendMessage(String msg) {
+        kafkaTemplate.send(kafkaTemplate.getDefaultTopic(), msg);
+    }
+
+    @KafkaListener(topics = "tutorilspoint", groupId = "group-id")
+    public void listen(String message){
+        System.out.println("New message from: " + message);
     }
 
 

@@ -1,3 +1,10 @@
+<div class = "sorting">
+  <label>Sort:</label>
+  <button class="sort-button" (click)=sortKcal()>Kcal</button>
+  <button class="sort-button" (click)=sortTime()>Time</button>
+  <button class="sort-button" (click)=sortLike()>Like</button>
+  <button class="sort-button" (click)=sortDislike()>Dislike</button>
+</div>
 <div class="content" fxLayout="row" fxLayoutAlign="center none">
   <app-api-card  *ngFor = "let recipe of recipes"
     (apiClick)="recipeView($event)"

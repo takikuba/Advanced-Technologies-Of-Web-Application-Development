@@ -13,7 +13,6 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   title = 'Sign up';
-  githubLink = 'https://github.com/bfwg/angular-spring-starter';
   form: FormGroup;
 
   /**
@@ -54,7 +53,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(64)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
       firstname: [''],
-      lastname: ['']
+      lastname: [''],
+      phone: [''],
+      description: ['']
     });
   }
 
@@ -64,7 +65,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   repository() {
-    window.location.href = this.githubLink;
   }
 
   onSubmit() {

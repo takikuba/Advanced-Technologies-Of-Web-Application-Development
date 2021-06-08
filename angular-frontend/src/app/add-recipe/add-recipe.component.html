@@ -1,0 +1,87 @@
+<div class="content">
+
+    <div class = "recipe">
+        <h5>New Recipe</h5>
+        <label>Title:</label>
+        <input type="text" class="form-control" [(ngModel)]="newRecipe.name" name = "name">
+        <label>Kcal:</label>
+        <input type="text" class="form-control" [(ngModel)]="newRecipe.kcal" name = "kcal">
+        <label>Time:</label>
+        <input type="text" class="form-control" [(ngModel)]="newRecipe.time" name = "time">
+        <label>Description:</label>
+        <input type="text" class="form-control" [(ngModel)]="newRecipe.description" name = "desc">
+        <label>Link:</label>
+        <input type="text" class="form-control" [(ngModel)]="newRecipe.link" name = "link">
+        <label>Image:</label>
+        <input type="file" [(ngModel)]="file" name = "image">
+    
+    </div>
+
+
+
+    <div class="ingredients">
+        <h4>Ingredients</h4>
+        <table>
+            <tbody>
+                <tr mdbTableCol *ngFor = "let ingredient of myIngredients">
+                    <td> {{ ingredient.name }} </td>
+                    <td> {{ ingredient.unit }} </td>
+                    <td> {{ ingredient.count }} </td>
+                    <td>
+                        <button (click) = "deleteIngredient(ingredient)"> <i class="fas fa-trash"></i></button>
+                    </td>
+    
+                </tr>
+            </tbody>
+        </table>
+
+        <form class="ingredients-form">
+            <label>Name: </label>
+            <div>
+            <select (change)="submitName($event.target.value)" [(ngModel)]="nIngredient" name="ingName">
+                <option [value]="ingredientName.name" *ngFor="let ingredientName of ingredientNames">
+                    {{ ingredientName.name }}
+                </option>
+            </select>
+            </div>
+            <label>Unit: </label>
+            <select (change)="submitUnit($event.target.value)" [(ngModel)]="nUnit" name="unit">
+                <option [value]="unit.name" *ngFor="let unit of unitNames">
+                    <td>{{ unit.name }}</td>
+                </option>
+            </select>
+            <label>Count: </label>
+            <input type="text" class="form-control" id = "name"
+            [value] = "count" name = "name">
+            <button (click)="addIngredient()">Add</button>
+        </form>
+    </div>
+
+
+    <div class="tags">
+        <h4>Tags</h4>
+        <table>
+            <tbody>
+                <tr mdbTableCol *ngFor = "let tag of myTags">
+                    <td> {{ tag.name }} </td>
+                    <td>
+                        <button (click) = "deleteTag(tag)"> <i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form class="ingredients-form">
+            <label>Tag: </label>
+            <select (change)="submitTag($event.target.value)">
+                <option *ngFor="let tag of tagNames">
+                    <td>{{ tag.name }}</td>
+                </option>
+            </select>
+            <button (click)="addTag()">Add</button>
+        </form>
+    </div>
+
+    <button (click)="addRecipe()">Add recipe!</button>
+
+</div>

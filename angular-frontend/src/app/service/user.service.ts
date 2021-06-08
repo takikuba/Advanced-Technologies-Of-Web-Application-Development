@@ -3,8 +3,16 @@ import {ApiService} from './api.service';
 import {ConfigService} from './config.service';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'app/shared/models/user';
+import { Tag } from 'app/shared/models/tag';
+import { routes } from 'app/app-routing.module';
+import { AdminTagsComponent } from 'app/admin/admin-tags/admin-tags.component';
+import { ThrowStmt } from '@angular/compiler';
+import { Ingredient } from 'app/shared/models/ingredient';
+import { IngredientName } from 'app/admin/admin-ingredients/ingredient-name';
+import { Unit } from 'app/shared/models/unit';
+import { Recipe } from 'app/shared/models/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +20,7 @@ import { User } from 'app/shared/models/user';
 export class UserService {
 
   private baseURL = "http://localhost:8080/api/";
-  currentUser;
+  currentUser: User;
 
   constructor(
     private apiService: ApiService,
@@ -52,4 +60,65 @@ export class UserService {
     return this.apiService.get(this.config.recipesUrlById(id));
   }
 
-}
+  getTagList(){
+    return this.apiService.get(this.config.tagUrl);
+  }
+
+  getIngredientsList(){
+    return this.apiService.get(this.config.ingredientsUrl);
+  }
+
+
+  addTag(tag: Tag): Promise<Tag[]> {
+    // console.log("POST!");
+    return this.apiService.fetchPost(this.config.tagUrl, tag);
+  }
+
+  deleteTag(tag: Tag): Promise<Tag[]> {
+    return this.apiService.fetchDelete(this.config.tagUrl, tag);
+  }
+
+  addIngredient(ingredient: IngredientName): Promise<IngredientName[]> {
+    // console.log("POST!");
+    return this.apiService.fetchPost(this.config.ingredientsUrl, ingredient);
+  }
+
+  deleteIngredient(ingredient: IngredientName): Promise<IngredientName[]> {
+    return this.apiService.fetchDelete(this.config.ingredientsUrl, ingredient);
+  }
+
+  getUnitList() {
+    return this.apiService.get(this.config.unitsUrl);
+  }
+
+  addUnit(unit: Unit): Promise<Unit[]> {
+    // console.log("POST!");
+    return this.apiService.fetchPost(this.config.unitsUrl, unit);
+  }
+
+  deleteUnit(unit: Unit): Promise<Unit[]> {
+    return this.apiService.fetchDelete(this.config.unitsUrl, unit);
+  }
+
+  addRecipe(recipe: Recipe):Promise<Recipe[]> {
+    return this.apiService.fetchPost(this.config.recipesUrl, recipe);
+  }
+
+  addLike(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  addDislike(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  correctRecipe(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  deleteUser(id: number) {
+    console.log(this.config.userUrlWithId(id));
+    return this.apiService.fetchDeleteUser(this.config.userUrlWithId(id));
+  }
+
+}   

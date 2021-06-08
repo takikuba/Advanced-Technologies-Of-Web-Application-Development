@@ -113,17 +113,11 @@ public class TokenHelper {
     }
 
     public String getToken(HttpServletRequest request) {
-        /**
-         *  Getting the token from Cookie store
-         */
+
         Cookie authCookie = getCookieValueByName(request, AUTH_COOKIE);
         if (authCookie != null) {
             return authCookie.getValue();
         }
-        /**
-         *  Getting the token from Authentication header
-         *  e.g Bearer your_token
-         */
         String authHeader = request.getHeader(AUTH_HEADER);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
@@ -132,13 +126,6 @@ public class TokenHelper {
         return null;
     }
 
-    /**
-     * Find a specific HTTP cookie in a request.
-     *
-     * @param request The HTTP request object.
-     * @param name    The cookie name to look for.
-     * @return The cookie, or <code>null</code> if not found.
-     */
     public Cookie getCookieValueByName(HttpServletRequest request, String name) {
         if (request.getCookies() == null) {
             return null;

@@ -68,4 +68,66 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
+
+  sortTime(){
+    var sorted: Recipe[] = this.recipes.sort((obj1, obj2) => {
+      if (obj1.time > obj2.time) {
+        return 1;
+    }
+
+    if (obj1.time < obj2.time) {
+        return -1;
+    }
+
+    return 0;
+    })
+    this.recipes = sorted;
+  }
+
+  sortKcal(){
+    var sorted: Recipe[] = this.recipes.sort((obj1, obj2) => {
+      if (obj1.kcal > obj2.kcal) {
+        return 1;
+    }
+
+    if (obj1.kcal < obj2.kcal) {
+        return -1;
+    }
+
+    return 0;
+    })
+    this.recipes = sorted;
+  }
+
+  sortLike(){
+    var sorted: Recipe[] = this.recipes.sort((obj1, obj2) => {
+      if (obj1.likeB > obj2.likeB) {
+        return 1;
+    }
+
+    if (obj1.likeB < obj2.likeB) {
+        return -1;
+    }
+
+    return 0;
+    })
+    this.recipes = sorted;
+  }
+
+  sortDislike(){
+    var sorted: Recipe[] = this.recipes.sort((obj1, obj2) => {
+      if (obj1.dislikeB > obj2.dislikeB) {
+        return 1;
+    }
+
+    if (obj1.dislikeB < obj2.dislikeB) {
+        return -1;
+    }
+
+    return 0;
+    })
+    this.recipes = sorted;
+  }
+
 }

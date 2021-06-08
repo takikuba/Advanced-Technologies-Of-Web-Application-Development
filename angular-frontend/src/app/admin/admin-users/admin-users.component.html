@@ -1,0 +1,13 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center none">
+    <app-user-card  *ngFor = "let user of users"
+      content='{{user.description}}'
+      fxFlex
+      imgUrl='assets/image/admin.png'
+      name='{{user.firstname}}'
+      surname='{{user.lastname}}'
+      phone='{{user.phone}}'
+      apiText="Delete"
+      id='{{user.id}}'
+    >
+    </app-user-card>
+  </div>
