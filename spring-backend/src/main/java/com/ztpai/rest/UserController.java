@@ -13,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,8 @@ public class UserController {
     private IngredientRepository ingredientRepo;
     @Autowired
     private RecipeTagsRepository recipeTagRepo;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     public UserController(UserService userService) {
@@ -167,6 +171,15 @@ public class UserController {
     public ResponseEntity.BodyBuilder addDisLike(@PathVariable long id, @RequestBody long idBody){
         recipeRepo.getOne(id).addDislike();
         return ResponseEntity.ok();
+    }
+
+    public void sendMessage(String msg) {
+        kafkaTemplate.send(kafkaTemplate.getDefaultTopic(), msg);
+    }
+
+    @KafkaListener(topics = "tutorilspoint", groupId = "group-id")
+    public void listen(String message){
+        System.out.println("New message from: " + message);
     }
 
 
