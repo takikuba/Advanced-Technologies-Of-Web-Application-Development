@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -33,6 +33,12 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    public Ingredient(String name, int count, String unit){
+        this.name = new IngredientName(name);
+        this.count = count;
+        this.unit = new Unit(unit);
+    }
+
     public Long getId() {
         return id;
     }
@@ -45,8 +51,8 @@ public class Ingredient {
         return name.getName();
     }
 
-    public void setName(IngredientName name) {
-        this.name = name;
+    public void setName(String name) {
+        this.name = new IngredientName(name);
     }
 
     public int getCount() {
@@ -57,11 +63,11 @@ public class Ingredient {
         this.count = count;
     }
 
-    public Unit getUnit() {
-        return unit;
+    public String getUnit() {
+        return unit.getName();
     }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
+    public void setUnit(String unit) {
+        this.unit = new Unit(unit);
     }
 }

@@ -26,6 +26,8 @@ import { AdminTagsComponent } from './admin/admin-tags/admin-tags.component';
 import { AdminIngredientsComponent } from './admin/admin-ingredients/admin-ingredients.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUnitComponent } from './admin/admin-unit/admin-unit.component';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { UserCardComponent } from './admin/admin-users/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AdminUnitComponent } from './admin/admin-unit/admin-unit.component';
     AdminTagsComponent,
     AdminIngredientsComponent,
     AdminUsersComponent,
-    AdminUnitComponent
+    AdminUnitComponent,
+    AddRecipeComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserAnimationsModule,

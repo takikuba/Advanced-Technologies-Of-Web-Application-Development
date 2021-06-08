@@ -1,16 +1,13 @@
-<h2>List of users:</h2>
-<table class="table table-striped">
-    <thead>
-        <th> Name </th>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let user of users">
-            <td> {{ user.firstName }} </td>
-            <td> {{ user.lastName }} </td>
-            <td> {{ user.username }} </td>
-            <td> {{ user.phone }} </td>
-            <td> {{ user.description }} </td>
-        </tr>
-    </tbody>
-    <!-- <a routerLink="../tag-create" routerLinkActive="active" class = "nav-link">+ tag</a> -->
-</table>
+<div class="content" fxLayout="row" fxLayoutAlign="center none">
+    <app-user-card  *ngFor = "let user of users"
+      content='{{user.description}}'
+      fxFlex
+      imgUrl='assets/image/admin.png'
+      name='{{user.firstname}}'
+      surname='{{user.lastname}}'
+      phone='{{user.phone}}'
+      apiText="Delete"
+      id='{{user.id}}'
+    >
+    </app-user-card>
+  </div>

@@ -32,13 +32,13 @@ public class Recipe {
     @Column(name = "link")
     private String link;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name = "recipe_ingredients",
             joinColumns = @JoinColumn(name = "id_recipe", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredient", referencedColumnName = "id"))
     List<Ingredient> ingredients;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name = "recipe_tags",
             joinColumns = @JoinColumn(name = "id_recipe", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_tags", referencedColumnName = "id"))
@@ -47,11 +47,9 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name, String description, int likeB, int dislikeB, int kcal, int time, String image, String link) {
+    public Recipe(String name, String description, int kcal, int time, String image, String link) {
         this.name = name;
         this.description = description;
-        this.likeB = likeB;
-        this.dislikeB = dislikeB;
         this.kcal = kcal;
         this.time = time;
         this.image = image;
@@ -158,4 +156,20 @@ public class Recipe {
         setDislikeB(++i);
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", likeB=" + likeB +
+                ", dislikeB=" + dislikeB +
+                ", kcal=" + kcal +
+                ", time=" + time +
+                ", image='" + image + '\'' +
+                ", link='" + link + '\'' +
+                ", ingredients=" + ingredients +
+                ", tags=" + tags +
+                '}';
+    }
 }

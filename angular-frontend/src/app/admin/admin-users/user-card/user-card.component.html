@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title><b>{{name}}</b></mat-card-title> <br>
+      <mat-card-title><b>{{surname}}</b></mat-card-title> <br>
+      <mat-card-title><b>{{phone}}</b></mat-card-title> <br>
+    </mat-card-header>
+    <img [src]="imgUrl" mat-card-image>
+  
+    <mat-card-content>
+      <p>
+        {{content}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button
+          (click)= "onButtonClick()"
+          color="primary"
+          mat-raised-button>
+          {{apiText}}
+        </button>
+      </mat-card-actions>
+  </mat-card>
+  

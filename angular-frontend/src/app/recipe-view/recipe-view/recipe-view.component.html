@@ -4,8 +4,8 @@
     <div class="social"> 
         <em class="fas fa-fire"> {{recipe.kcal}} </em>
         <em class="fas fa-stopwatch"> {{recipe.time}} </em>
-        <em class="fas fa-heart" (click)=recipe.addLike()> {{recipe.likeB}} </em>
-        <em class="fas fa-minus-square"> {{recipe.dislikeB}} </em> 
+        <em class="fas fa-heart" (click)="addLike()"> {{recipe.likeB}}</em>
+        <em class="fas fa-minus-square" (click)="addDislike()"> {{recipe.dislikeB}} </em> 
     </div>
 
     <img class="recipe-image" src="assets/image/{{recipe.image}}">
@@ -20,7 +20,7 @@
         <tr *ngFor = "let ingredient of recipe.ingredients">
             <td class="ing-td"> {{ ingredient.name }} </td>
             <td class="ing-td"> {{ ingredient.count}} </td>
-            <td class="ing-td"> {{ ingredient.unit.name }} </td>
+            <td class="ing-td"> {{ ingredient.unit }} </td>
         </tr>
     </div>
 

@@ -41,7 +41,10 @@ export class ConfigService {
   private _usersUrl = this.userUrl + '';
 
   get usersUrl(): string {
-    return this._usersUrl;
+    return this.apiUrl + '/users';
+  }
+  userUrlWithId(id: number) {
+    return this.usersUrl + '/' + id;
   }
 
   get recipesUrl(): string {
@@ -63,6 +66,11 @@ export class ConfigService {
   recipesUrlById(id: number): string {
     console.log(this.apiUrl + '/recipes/' + id);
     return this.apiUrl + '/recipes/' + id;
+  }
+
+  recipesUrlByIdWithPath(id: number, more: string): string {
+    console.log(this.apiUrl + '/recipes/' + id + '/' + more);
+    return this.apiUrl + '/recipes/' + id + '/' + more;
   }
 
   private _fooUrl = this.apiUrl + '/foo';

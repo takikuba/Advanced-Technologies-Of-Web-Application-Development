@@ -57,8 +57,8 @@ export class ApiService {
   }
 
   fetchPost(path: string, body: any): Promise<any> {
-    console.log("POST!");
-    console.log(JSON.stringify(body));
+    // console.log("POST!");
+    // console.log(JSON.stringify(body));
     return fetch(path, {
                                 method: "POST", 
                                 credentials: "include", 
@@ -66,9 +66,20 @@ export class ApiService {
                                 headers: {"Content-Type": "application/json"}}).then(data => data.json());
   }
 
+
+  fetchPut(path: string, body: any): Promise<any> {
+    // console.log("DELETE!");
+    // console.log(body);
+    return fetch(path, {
+                                method: "PUT", 
+                                credentials: "include", 
+                                body: JSON.stringify(body),
+                                headers: {"Content-Type": "application/json"}}).then(data => data.json());
+  }
+
   fetchDelete(path: string, body: any): Promise<any> {
-    console.log("DELETE!");
-    console.log(body);
+    // console.log("PUT!");
+    // console.log(JSON.stringify(body));
     return fetch(path, {
                                 method: "DELETE", 
                                 credentials: "include", 
@@ -94,6 +105,15 @@ export class ApiService {
       console.log("User athorize! NOT 401!")
     }
     throw error;
+  }
+
+  fetchDeleteUser(path: string): Promise<any> {
+    // console.log("PUT!");
+    // console.log(JSON.stringify(body));
+    return fetch(path, {
+                                method: "DELETE", 
+                                credentials: "include", 
+                                headers: {"Content-Type": "application/json"}}).then(data => data.json());
   }
 
 }

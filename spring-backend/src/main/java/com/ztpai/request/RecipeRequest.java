@@ -1,4 +1,4 @@
-package com.ztpai.responses;
+package com.ztpai.request;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import javax.persistence.Entity;
 import java.util.List;
 
-public class RecipeResponse {
+public class RecipeRequest {
 
     private String name;
     private String description;
@@ -18,15 +18,15 @@ public class RecipeResponse {
     private int kcal;
     private int time;
     private String link;
-    private List<TagResponse> tags;
-    private List<IngredientResponse> ingredients;
+    private List<TagRequest> tags;
+    private List<IngredientRequest> ingredients;
     private int dislikeB;
     private int likeB;
 
-    public RecipeResponse() {
+    public RecipeRequest() {
     }
 
-    public RecipeResponse(String name, String description, String image, int kcal, int time, String link, List<TagResponse> tags, List<IngredientResponse> ingredients, int dislikeB, int likeB) {
+    public RecipeRequest(String name, String description, String image, int kcal, int time, String link, List<TagRequest> tags, List<IngredientRequest> ingredients, int dislikeB, int likeB) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -87,19 +87,19 @@ public class RecipeResponse {
         this.link = link;
     }
 
-    public List<TagResponse> getTags() {
+    public List<TagRequest> getTags() {
         return tags;
     }
 
-    public void setTags(List<TagResponse> tags) {
+    public void setTags(List<TagRequest> tags) {
         this.tags = tags;
     }
 
-    public List<IngredientResponse> getIngredients() {
+    public List<IngredientRequest> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<IngredientResponse> ingredients) {
+    public void setIngredients(List<IngredientRequest> ingredients) {
         this.ingredients = ingredients;
     }
 

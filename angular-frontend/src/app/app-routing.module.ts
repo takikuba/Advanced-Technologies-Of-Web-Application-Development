@@ -9,10 +9,11 @@ import {ChangePasswordComponent} from './change-password';
 import {ForbiddenComponent} from './forbidden';
 import {SignupComponent} from './signup';
 import { RecipeViewComponent } from './recipe-view/recipe-view/recipe-view.component';
-import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';  
 import { AdminTagsComponent } from './admin/admin-tags/admin-tags.component';
 import { AdminIngredientsComponent } from './admin/admin-ingredients/admin-ingredients.component';
 import { AdminUnitComponent } from './admin/admin-unit/admin-unit.component';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,11 @@ export const routes: Routes = [
     path: 'admin/units',
     component: AdminUnitComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'add-recipe',
+    component: AddRecipeComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'recipes/:id',

@@ -30,6 +30,18 @@ app-github {
   }
 }
 
+.sorting {
+  text-align: center;
+  margin: 20px;
+}
+
+.sort-button{
+  color: #696969;
+  margin: 5px;
+  background-color: #ffae5c93;
+  border-radius: 10px;
+}
+
 @media screen and (max-width: 599px) {
 
   .content {

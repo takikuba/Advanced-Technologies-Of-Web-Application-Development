@@ -12,6 +12,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Ingredient } from 'app/shared/models/ingredient';
 import { IngredientName } from 'app/admin/admin-ingredients/ingredient-name';
 import { Unit } from 'app/shared/models/unit';
+import { Recipe } from 'app/shared/models/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -99,4 +100,25 @@ export class UserService {
     return this.apiService.fetchDelete(this.config.unitsUrl, unit);
   }
 
-}  
+  addRecipe(recipe: Recipe):Promise<Recipe[]> {
+    return this.apiService.fetchPost(this.config.recipesUrl, recipe);
+  }
+
+  addLike(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  addDislike(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  correctRecipe(id: number, recipe: Recipe){
+    return this.apiService.fetchPut(this.config.recipesUrlById(id), recipe);
+  }
+
+  deleteUser(id: number) {
+    console.log(this.config.userUrlWithId(id));
+    return this.apiService.fetchDeleteUser(this.config.userUrlWithId(id));
+  }
+
+}   
